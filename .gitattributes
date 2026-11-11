@@ -1,0 +1,30 @@
+# Normalize line endings: store LF in repo, checkout as native
+* text=auto
+
+# C/C++ sources — always LF
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.h   text eol=lf
+*.c   text eol=lf
+
+# CMake
+CMakeLists.txt text eol=lf
+*.cmake        text eol=lf
+
+# JSON assets
+*.json text eol=lf
+
+# Markdown / docs
+*.md   text eol=lf
+
+# Windows batch scripts — CRLF
+*.bat  text eol=crlf
+
+# Binary files — no line ending conversion
+*.exe  binary
+*.dll  binary
+*.lib  binary
+*.a    binary
+*.so   binary
+*.png  binary
+*.jpg  binary

@@ -1,0 +1,145 @@
+--- a/tests/e2e/e2e_framework.hpp
++++ b/tests/e2e/e2e_framework.hpp
+@@ -88,23 +88,57 @@ inline std::string FormatValue(const T& value) {
+     }
+ }
+ 
++// C++20 standard integer trait: includes signed and unsigned char/short/int/long/long long,
++// but explicitly excludes bool and character types (char, wchar_t, char8_t, char16_t, char32_t)
++// to satisfy ISO C++20 [utility.intcmp] mandates and avoid MSVC static_assert failures.
++template <typename T>
++inline constexpr bool is_standard_integer_v =
++    std::is_integral_v<std::remove_cvref_t<T>> &&
++    !std::is_same_v<std::remove_cvref_t<T>, bool> &&
++    !std::is_same_v<std::remove_cvref_t<T>, char> &&
++    !std::is_same_v<std::remove_cvref_t<T>, wchar_t> &&
++    !std::is_same_v<std::remove_cvref_t<T>, char8_t> &&
++    !std::is_same_v<std::remove_cvref_t<T>, char16_t> &&
++    !std::is_same_v<std::remove_cvref_t<T>, char32_t>;
++
++template <typename T>
++concept StandardInteger = is_standard_integer_v<T>;
++
++template <typename T, typename U>
++inline constexpr bool is_standard_integer_pair_v =
++    is_standard_integer_v<T> && is_standard_integer_v<U>;
++
+ template <typename T, typename U>
+ inline bool CompareEqual(const T& a, const U& b) {
+-    if constexpr (std::is_integral_v<std::decay_t<T>> && std::is_integral_v<std::decay_t<U>>) {
++    if constexpr (is_standard_integer_pair_v<T, U>) {
+         return std::cmp_equal(a, b);
+     } else {
+         return a == b;
+     }
+ }
+ 
+ template <typename T, typename U>
+ inline bool CompareNotEqual(const T& a, const U& b) {
+-    if constexpr (std::is_integral_v<std::decay_t<T>> && std::is_integral_v<std::decay_t<U>>) {
++    if constexpr (is_standard_integer_pair_v<T, U>) {
+         return std::cmp_not_equal(a, b);
+     } else {
+         return a != b;
+     }
+ }
+ 
++template <typename T, typename U>
++inline bool CompareLess(const T& a, const U& b) {
++    if constexpr (is_standard_integer_pair_v<T, U>) {
++        return std::cmp_less(a, b);
++    } else {
++        return a < b;
++    }
++}
++
++template <typename T, typename U>
++inline bool CompareGreater(const T& a, const U& b) {
++    if constexpr (is_standard_integer_pair_v<T, U>) {
++        return std::cmp_greater(a, b);
++    } else {
++        return a > b;
++    }
++}
++
++template <typename T, typename U>
++inline bool CompareLessEqual(const T& a, const U& b) {
++    if constexpr (is_standard_integer_pair_v<T, U>) {
++        return std::cmp_less_equal(a, b);
++    } else {
++        return a <= b;
++    }
++}
++
++template <typename T, typename U>
++inline bool CompareGreaterEqual(const T& a, const U& b) {
++    if constexpr (is_standard_integer_pair_v<T, U>) {
++        return std::cmp_greater_equal(a, b);
++    } else {
++        return a >= b;
++    }
++}
++
+ template <typename T, typename U, typename E>
+ inline bool CompareFloatNear(const T& a, const U& b, const E& eps) {
+     return std::abs(static_cast<double>(a) - static_cast<double>(b)) <= static_cast<double>(eps);
+@@ -161,8 +195,9 @@ inline bool CompareFloatNear(const T& a, const U& b, const E& eps) {
+         auto&& _eps = (epsilon); \
+         if (!::sandbox::test::CompareFloatNear(_valA, _valB, _eps)) { \
+             double _diff = std::abs(static_cast<double>(_valA) - static_cast<double>(_valB)); \
++            std::ostringstream _oss; \
++            _oss << std::setprecision(9) << _diff << " > " << std::setprecision(9) << static_cast<double>(_eps); \
+             throw ::sandbox::test::AssertionFailureException( \
+                 std::string("ASSERT_FLOAT_NEAR(") + #a + ", " + #b + ", " + #epsilon + ") failed: diff " + \
+-                std::to_string(_diff) + " > " + std::to_string(_eps) + " (" + \
++                _oss.str() + " (" + \
+                 ::sandbox::test::FormatValue(_valA) + " vs " + ::sandbox::test::FormatValue(_valB) + ")", \
+                 __FILE__, __LINE__); \
+         } \
+@@ -172,7 +207,7 @@ inline bool CompareFloatNear(const T& a, const U& b, const E& eps) {
+     do { \
+         auto&& _valA = (a); \
+         auto&& _valB = (b); \
+-        if (!(_valA > _valB)) { \
++        if (!::sandbox::test::CompareGreater(_valA, _valB)) { \
+             throw ::sandbox::test::AssertionFailureException( \
+                 std::string("ASSERT_GT(") + #a + ", " + #b + ") failed: " + \
+                 ::sandbox::test::FormatValue(_valA) + " <= " + ::sandbox::test::FormatValue(_valB), \
+@@ -183,7 +218,7 @@ inline bool CompareFloatNear(const T& a, const U& b, const E& eps) {
+     do { \
+         auto&& _valA = (a); \
+         auto&& _valB = (b); \
+-        if (!(_valA < _valB)) { \
++        if (!::sandbox::test::CompareLess(_valA, _valB)) { \
+             throw ::sandbox::test::AssertionFailureException( \
+                 std::string("ASSERT_LT(") + #a + ", " + #b + ") failed: " + \
+                 ::sandbox::test::FormatValue(_valA) + " >= " + ::sandbox::test::FormatValue(_valB), \
+@@ -194,7 +229,7 @@ inline bool CompareFloatNear(const T& a, const U& b, const E& eps) {
+     do { \
+         auto&& _valA = (a); \
+         auto&& _valB = (b); \
+-        if (!(_valA >= _valB)) { \
++        if (!::sandbox::test::CompareGreaterEqual(_valA, _valB)) { \
+             throw ::sandbox::test::AssertionFailureException( \
+                 std::string("ASSERT_GE(") + #a + ", " + #b + ") failed: " + \
+                 ::sandbox::test::FormatValue(_valA) + " < " + ::sandbox::test::FormatValue(_valB), \
+@@ -205,7 +240,7 @@ inline bool CompareFloatNear(const T& a, const U& b, const E& eps) {
+     do { \
+         auto&& _valA = (a); \
+         auto&& _valB = (b); \
+-        if (!(_valA <= _valB)) { \
++        if (!::sandbox::test::CompareLessEqual(_valA, _valB)) { \
+             throw ::sandbox::test::AssertionFailureException( \
+                 std::string("ASSERT_LE(") + #a + ", " + #b + ") failed: " + \
+                 ::sandbox::test::FormatValue(_valA) + " > " + ::sandbox::test::FormatValue(_valB), \
+@@ -346,6 +381,8 @@ public:
+         static bool s_loaded = false;
+         if (!s_loaded) {
+             std::string dir = ResolveAssetPath("assets/materials");
+-            sim::MaterialRegistry::Instance().LoadFromDirectory(dir);
++            if (!sim::MaterialRegistry::Instance().LoadFromDirectory(dir)) {
++                std::cerr << "[ERROR] [TestWorldFixture] Failed to load materials from: " << dir << "\n";
++            }
+             s_loaded = true;
+         }
+     }

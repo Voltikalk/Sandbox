@@ -1,0 +1,22 @@
+{
+    "id": 11,
+    "name": "smoke",
+    "category": "gases",
+    "state": "Gas",
+    "color": [100, 100, 100, 150],
+    "color_variation": 15,
+    "density": 0.8,
+    "dispersion": 2,
+    "flammability": 0.0,
+    "ignition_temp": 10000.0,
+    "melt_point": 10000.0,
+    "boil_point": 10000.0,
+    "freeze_point": -273.15,
+    "specific_heat": 1.00,
+    "thermal_conductivity": 0.03,
+    "strength": 0.0,
+    "lifetime": 75,
+    "melt_target": "",
+    "boil_target": "",
+    "freeze_target": ""
+}

@@ -1,0 +1,204 @@
+{
+  "reactions": [
+    {
+      "name": "water_lava_cooling",
+      "reactant_a": "water",
+      "reactant_b": "lava",
+      "product_a": "steam",
+      "product_b": "stone",
+      "heat_delta": 150.0,
+      "probability": 1.0,
+      "explode": false,
+      "explosion_power": 0.0,
+      "explosion_radius": 0
+    },
+    {
+      "name": "water_fire_extinguish",
+      "reactant_a": "water",
+      "reactant_b": "fire",
+      "product_a": "steam",
+      "product_b": "air",
+      "heat_delta": -50.0,
+      "probability": 1.0,
+      "explode": false
+    },
+    {
+      "name": "acid_stone_corrosion",
+      "reactant_a": "acid",
+      "reactant_b": "stone",
+      "product_a": "smoke",
+      "product_b": "air",
+      "heat_delta": 40.0,
+      "probability": 0.25,
+      "explode": false
+    },
+    {
+      "name": "acid_wood_corrosion",
+      "reactant_a": "acid",
+      "reactant_b": "wood",
+      "product_a": "smoke",
+      "product_b": "air",
+      "heat_delta": 50.0,
+      "probability": 0.35,
+      "explode": false
+    },
+    {
+      "name": "acid_iron_corrosion",
+      "reactant_a": "acid",
+      "reactant_b": "iron",
+      "product_a": "smoke",
+      "product_b": "air",
+      "heat_delta": 60.0,
+      "probability": 0.20,
+      "explode": false
+    },
+    {
+      "name": "acid_dirt_corrosion",
+      "reactant_a": "acid",
+      "reactant_b": "dirt",
+      "product_a": "smoke",
+      "product_b": "air",
+      "heat_delta": 30.0,
+      "probability": 0.30,
+      "explode": false
+    },
+    {
+      "name": "acid_sand_corrosion",
+      "reactant_a": "acid",
+      "reactant_b": "sand",
+      "product_a": "smoke",
+      "product_b": "air",
+      "heat_delta": 25.0,
+      "probability": 0.20,
+      "explode": false
+    },
+    {
+      "name": "acid_water_dilution",
+      "reactant_a": "acid",
+      "reactant_b": "water",
+      "product_a": "water",
+      "product_b": "smoke",
+      "heat_delta": 20.0,
+      "probability": 0.05,
+      "explode": false
+    },
+    {
+      "name": "fire_wood_combustion",
+      "reactant_a": "fire",
+      "reactant_b": "wood",
+      "product_a": "fire",
+      "product_b": "ash",
+      "heat_delta": 100.0,
+      "probability": 0.30,
+      "explode": false
+    },
+    {
+      "name": "fire_oil_combustion",
+      "reactant_a": "fire",
+      "reactant_b": "oil",
+      "product_a": "fire",
+      "product_b": "fire",
+      "heat_delta": 180.0,
+      "probability": 0.80,
+      "explode": false
+    },
+    {
+      "name": "fire_gunpowder_detonation",
+      "reactant_a": "fire",
+      "reactant_b": "gunpowder",
+      "product_a": "fire",
+      "product_b": "air",
+      "heat_delta": 300.0,
+      "probability": 1.0,
+      "explode": true,
+      "explosion_power": 50.0,
+      "explosion_radius": 15
+    },
+    {
+      "name": "fire_tnt_detonation",
+      "reactant_a": "fire",
+      "reactant_b": "tnt",
+      "product_a": "fire",
+      "product_b": "air",
+      "heat_delta": 500.0,
+      "probability": 1.0,
+      "explode": true,
+      "explosion_power": 150.0,
+      "explosion_radius": 35
+    },
+    {
+      "name": "fire_ice_melting",
+      "reactant_a": "fire",
+      "reactant_b": "ice",
+      "product_a": "water",
+      "product_b": "steam",
+      "heat_delta": -20.0,
+      "probability": 0.80,
+      "explode": false
+    },
+    {
+      "name": "lava_wood_ignition",
+      "reactant_a": "lava",
+      "reactant_b": "wood",
+      "product_a": "lava",
+      "product_b": "ash",
+      "heat_delta": 150.0,
+      "probability": 0.90,
+      "explode": false
+    },
+    {
+      "name": "lava_oil_ignition",
+      "reactant_a": "lava",
+      "reactant_b": "oil",
+      "product_a": "lava",
+      "product_b": "fire",
+      "heat_delta": 250.0,
+      "probability": 0.95,
+      "explode": false
+    },
+    {
+      "name": "lava_gunpowder_detonation",
+      "reactant_a": "lava",
+      "reactant_b": "gunpowder",
+      "product_a": "lava",
+      "product_b": "air",
+      "heat_delta": 350.0,
+      "probability": 1.0,
+      "explode": true,
+      "explosion_power": 50.0,
+      "explosion_radius": 15
+    },
+    {
+      "name": "lava_tnt_detonation",
+      "reactant_a": "lava",
+      "reactant_b": "tnt",
+      "product_a": "lava",
+      "product_b": "air",
+      "heat_delta": 600.0,
+      "probability": 1.0,
+      "explode": true,
+      "explosion_power": 150.0,
+      "explosion_radius": 35
+    },
+    {
+      "name": "lava_ice_vaporization",
+      "reactant_a": "lava",
+      "reactant_b": "ice",
+      "product_a": "stone",
+      "product_b": "steam",
+      "heat_delta": 120.0,
+      "probability": 1.0,
+      "explode": false
+    },
+    {
+      "name": "lava_sand_vitrification",
+      "reactant_a": "lava",
+      "reactant_b": "sand",
+      "product_a": "lava",
+      "product_b": "glass",
+      "heat_delta": 50.0,
+      "probability": 0.15,
+      "explode": false
+    }
+  ]
+}

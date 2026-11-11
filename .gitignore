@@ -1,0 +1,51 @@
+# Build output
+build/
+out/
+cmake-build-*/
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.a
+*.so
+
+# Compiled object files
+*.obj
+*.o
+
+# CMake cache / generated
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
+
+# vcpkg installed packages (only lock file is needed)
+vcpkg_installed/
+
+# IDE / editor
+.vs/
+.vscode/settings.json
+*.code-workspace
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# ImGui layout (auto-generated, regenerated at startup)
+imgui.ini
+
+# Testing artifacts
+Testing/
+*.xml
+
+# OS
+Thumbs.db
+.DS_Store

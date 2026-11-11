@@ -1,0 +1,22 @@
+{
+    "id": 12,
+    "name": "wood",
+    "category": "solids",
+    "state": "Solid",
+    "color": [142, 85, 45, 255],
+    "color_variation": 10,
+    "density": 650.0,
+    "dispersion": 0,
+    "flammability": 0.60,
+    "ignition_temp": 250.0,
+    "melt_point": 10000.0,
+    "boil_point": 10000.0,
+    "freeze_point": -273.15,
+    "specific_heat": 1.70,
+    "thermal_conductivity": 0.10,
+    "strength": 30.0,
+    "lifetime": 0,
+    "melt_target": "",
+    "boil_target": "",
+    "freeze_target": ""
+}

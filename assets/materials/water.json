@@ -1,0 +1,22 @@
+{
+    "id": 4,
+    "name": "water",
+    "category": "liquids",
+    "state": "Liquid",
+    "color": [34, 115, 230, 200],
+    "color_variation": 8,
+    "density": 1000.0,
+    "dispersion": 5,
+    "flammability": 0.0,
+    "ignition_temp": 10000.0,
+    "melt_point": 10000.0,
+    "boil_point": 100.0,
+    "freeze_point": 0.0,
+    "specific_heat": 4.18,
+    "thermal_conductivity": 0.60,
+    "strength": 0.0,
+    "lifetime": 0,
+    "melt_target": "",
+    "boil_target": "steam",
+    "freeze_target": "ice"
+}

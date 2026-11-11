@@ -1,0 +1,135 @@
+--- a/tests/e2e/test_main.cpp
++++ b/tests/e2e/test_main.cpp
+@@ -40,11 +40,13 @@
+ struct CommandLineOptions {
+     bool runTier1{false};
+     bool runTier2{false};
+     bool runTier3{false};
+     bool runTier4{false};
+     bool runTier5{false};
+     bool verbose{false};
+     bool listOnly{false};
+     bool showHelp{false};
++    bool hasSyntaxError{false};
++    std::string errorMessage{""};
+     std::string filter{""};
+ };
+ 
+ void PrintUsage(const char* exeName) {
+     std::cout << "Usage: " << exeName << " [options]\n\n"
+               << "Options:\n"
+               << "  --tier=1           Run only Tier 1: Feature Coverage Tests\n"
+               << "  --tier=2           Run only Tier 2: Boundary & Corner Case Tests\n"
+               << "  --tier=3           Run only Tier 3: Pairwise Cross-Feature Tests\n"
+               << "  --tier=4           Run only Tier 4: Workload & Scenario Tests\n"
+-              << "  --tier=5           Run only Tier 5: Adversarial Hardening Tests\n"
+-              << "  --all              Run all test tiers (default if no tier specified)\n"
++              << "  --tier=5           Run only Tier 5: Adversarial Hardening Tests (opt-in)\n"
++              << "  --all              Run Tiers 1 to 4 (default if no tier specified)\n"
+               << "  --verbose, -v      Enable detailed per-test logging and assertions\n"
+               << "  --filter=<str>     Run only tests whose Suite.Name contains <str>\n"
+               << "  --test=<str>       Alias for --filter=<str>\n"
+               << "  --list             List all registered tests without running\n"
+               << "  --help, -h         Show this help message\n";
+ }
+ 
+ CommandLineOptions ParseCommandLine(int argc, char* argv[]) {
+     CommandLineOptions opts;
+     bool explicitTierSelected = false;
+ 
+     for (int i = 1; i < argc; ++i) {
+         std::string_view arg = argv[i];
+-        if (arg == "--tier=1") {
+-            opts.runTier1 = true;
+-            explicitTierSelected = true;
+-        } else if (arg == "--tier=2") {
+-            opts.runTier2 = true;
+-            explicitTierSelected = true;
+-        } else if (arg == "--tier=3") {
+-            opts.runTier3 = true;
+-            explicitTierSelected = true;
+-        } else if (arg == "--tier=4") {
+-            opts.runTier4 = true;
+-            explicitTierSelected = true;
+-        } else if (arg == "--tier=5") {
+-            opts.runTier5 = true;
+-            explicitTierSelected = true;
+-        } else if (arg == "--all") {
+-            opts.runTier1 = opts.runTier2 = opts.runTier3 = opts.runTier4 = opts.runTier5 = true;
++        if (arg.rfind("--tier=", 0) == 0) {
++            std::string_view val = arg.substr(7);
++            if (val == "1") {
++                opts.runTier1 = true;
++                explicitTierSelected = true;
++            } else if (val == "2") {
++                opts.runTier2 = true;
++                explicitTierSelected = true;
++            } else if (val == "3") {
++                opts.runTier3 = true;
++                explicitTierSelected = true;
++            } else if (val == "4") {
++                opts.runTier4 = true;
++                explicitTierSelected = true;
++            } else if (val == "5") {
++                opts.runTier5 = true;
++                explicitTierSelected = true;
++            } else {
++                opts.hasSyntaxError = true;
++                if (!opts.errorMessage.empty()) opts.errorMessage += "\n";
++                opts.errorMessage += "Invalid tier argument: " + std::string(arg) + " (expected 1, 2, 3, 4, or 5)";
++            }
++        } else if (arg == "--tier") {
++            opts.hasSyntaxError = true;
++            if (!opts.errorMessage.empty()) opts.errorMessage += "\n";
++            opts.errorMessage += "Missing tier value for '--tier'. Expected '--tier=N' (N in 1..5)";
++        } else if (arg == "--all") {
++            opts.runTier1 = opts.runTier2 = opts.runTier3 = opts.runTier4 = true;
++            opts.runTier5 = false;
+             explicitTierSelected = true;
+         } else if (arg == "--verbose" || arg == "-v") {
+             opts.verbose = true;
+         } else if (arg == "--list") {
+             opts.listOnly = true;
+         } else if (arg == "--help" || arg == "-h") {
+             opts.showHelp = true;
+         } else if (arg.rfind("--filter=", 0) == 0) {
+             opts.filter = std::string(arg.substr(9));
+         } else if (arg.rfind("--test=", 0) == 0) {
+             opts.filter = std::string(arg.substr(7));
++        } else if (arg == "--filter" || arg == "--test") {
++            opts.hasSyntaxError = true;
++            if (!opts.errorMessage.empty()) opts.errorMessage += "\n";
++            opts.errorMessage += "Missing argument for option: " + std::string(arg) + " (expected '" + std::string(arg) + "=<str>')";
+         } else {
+-            std::cerr << "Unknown argument: " << arg << "\n";
+-            opts.showHelp = true;
++            opts.hasSyntaxError = true;
++            if (!opts.errorMessage.empty()) opts.errorMessage += "\n";
++            opts.errorMessage += "Unknown argument: " + std::string(arg);
+         }
+     }
+ 
+     if (!explicitTierSelected) {
+-        opts.runTier1 = opts.runTier2 = opts.runTier3 = opts.runTier4 = opts.runTier5 = true;
++        opts.runTier1 = opts.runTier2 = opts.runTier3 = opts.runTier4 = true;
++        opts.runTier5 = false;
+     }
+ 
+     return opts;
+ }
+@@ -182,6 +202,14 @@
+     EnableVirtualTerminal();
+ 
+     CommandLineOptions opts = ParseCommandLine(argc, argv);
++    if (opts.hasSyntaxError) {
++        if (!opts.errorMessage.empty()) {
++            std::cerr << opts.errorMessage << "\n\n";
++        }
++        PrintUsage(argv[0]);
++        return 2;
++    }
++
+     if (opts.showHelp) {
+         PrintUsage(argv[0]);
+         return 0;
+

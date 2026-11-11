@@ -1,0 +1,23 @@
+# Progress — explorer_mtest1_it2_2
+
+- Last visited: 2026-11-11T06:35:30Z
+- Status: Investigation and empirical verification complete
+- Completed:
+  - Reviewed failure report from Challenger 2 (`challenger_mtest1_2/handoff.md`).
+  - Reproduced exit code 0 on `--invalid-flag`, `--tier=9`, and `--all` enabling T5.
+  - Designed updated `CommandLineOptions`, `PrintUsage`, `ParseCommandLine`, and `main()`.
+  - Empirically verified drop-in implementation with MSVC C++20 build and 14 test cases:
+    - `--invalid-flag` -> exit code 2
+    - `--tier=9`, `--tier=abc`, `--tier=` -> exit code 2
+    - `--tier` -> exit code 2
+    - `--filter`, `--test` -> exit code 2
+    - `--tier=1 --invalid-option` -> exit code 2
+    - `--help`, `-h` -> exit code 0
+    - `--list` -> exit code 0
+    - `--all` -> Tiers Active: T1 T2 T3 T4 (T5 excluded), exit code 0
+    - default -> Tiers Active: T1 T2 T3 T4 (T5 excluded), exit code 0
+    - `--tier=5` -> Tiers Active: T5 (opt-in), exit code 0
+    - CTest 6/6 passed (100%)
+  - Reverted `tests/e2e/test_main.cpp` to preserve read-only Explorer invariant.
+  - Generated unified patch: `test_main_cli_syntax.patch`.
+- Current Step: Drafting handoff.md and updating BRIEFING.md.

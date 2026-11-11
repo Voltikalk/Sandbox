@@ -1,0 +1,22 @@
+{
+    "id": 16,
+    "name": "glass",
+    "category": "solids",
+    "state": "Solid",
+    "color": [220, 240, 245, 120],
+    "color_variation": 5,
+    "density": 2400.0,
+    "dispersion": 0,
+    "flammability": 0.0,
+    "ignition_temp": 10000.0,
+    "melt_point": 1400.0,
+    "boil_point": 10000.0,
+    "freeze_point": -273.15,
+    "specific_heat": 0.84,
+    "thermal_conductivity": 0.30,
+    "strength": 25.0,
+    "lifetime": 0,
+    "melt_target": "lava",
+    "boil_target": "",
+    "freeze_target": ""
+}

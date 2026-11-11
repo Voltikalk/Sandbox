@@ -1,0 +1,22 @@
+{
+    "id": 15,
+    "name": "tnt",
+    "category": "explosives",
+    "state": "Solid",
+    "color": [210, 45, 30, 255],
+    "color_variation": 5,
+    "density": 1654.0,
+    "dispersion": 0,
+    "flammability": 0.90,
+    "ignition_temp": 250.0,
+    "melt_point": 10000.0,
+    "boil_point": 10000.0,
+    "freeze_point": -273.15,
+    "specific_heat": 1.10,
+    "thermal_conductivity": 0.15,
+    "strength": 40.0,
+    "lifetime": 0,
+    "melt_target": "",
+    "boil_target": "",
+    "freeze_target": ""
+}

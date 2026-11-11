@@ -1,0 +1,22 @@
+{
+    "id": 0,
+    "name": "air",
+    "category": "gases",
+    "state": "Gas",
+    "color": [0, 0, 0, 0],
+    "color_variation": 0,
+    "density": 0.0,
+    "dispersion": 0,
+    "flammability": 0.0,
+    "ignition_temp": 10000.0,
+    "melt_point": 10000.0,
+    "boil_point": 10000.0,
+    "freeze_point": -273.15,
+    "specific_heat": 1.0,
+    "thermal_conductivity": 0.02,
+    "strength": 0.0,
+    "lifetime": 0,
+    "melt_target": "",
+    "boil_target": "",
+    "freeze_target": ""
+}

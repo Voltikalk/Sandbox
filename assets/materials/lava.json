@@ -1,0 +1,22 @@
+{
+    "id": 9,
+    "name": "lava",
+    "category": "liquids",
+    "state": "Liquid",
+    "color": [255, 90, 0, 255],
+    "color_variation": 20,
+    "density": 3000.0,
+    "dispersion": 1,
+    "flammability": 0.0,
+    "ignition_temp": 10000.0,
+    "melt_point": 10000.0,
+    "boil_point": 3000.0,
+    "freeze_point": 700.0,
+    "specific_heat": 1.20,
+    "thermal_conductivity": 0.70,
+    "strength": 40.0,
+    "lifetime": 0,
+    "melt_target": "",
+    "boil_target": "",
+    "freeze_target": "stone"
+}

@@ -1,0 +1,22 @@
+{
+    "id": 8,
+    "name": "acid",
+    "category": "liquids",
+    "state": "Liquid",
+    "color": [75, 230, 45, 220],
+    "color_variation": 12,
+    "density": 1200.0,
+    "dispersion": 4,
+    "flammability": 0.0,
+    "ignition_temp": 10000.0,
+    "melt_point": 10000.0,
+    "boil_point": 110.0,
+    "freeze_point": -273.15,
+    "specific_heat": 2.50,
+    "thermal_conductivity": 0.30,
+    "strength": 0.0,
+    "lifetime": 0,
+    "melt_target": "",
+    "boil_target": "smoke",
+    "freeze_target": ""
+}

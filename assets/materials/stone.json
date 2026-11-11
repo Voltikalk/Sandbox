@@ -1,0 +1,22 @@
+{
+    "id": 1,
+    "name": "stone",
+    "category": "solids",
+    "state": "Solid",
+    "color": [128, 128, 128, 255],
+    "color_variation": 15,
+    "density": 2500.0,
+    "dispersion": 0,
+    "flammability": 0.0,
+    "ignition_temp": 10000.0,
+    "melt_point": 1200.0,
+    "boil_point": 10000.0,
+    "freeze_point": -273.15,
+    "specific_heat": 0.80,
+    "thermal_conductivity": 0.20,
+    "strength": 80.0,
+    "lifetime": 0,
+    "melt_target": "lava",
+    "boil_target": "",
+    "freeze_target": ""
+}

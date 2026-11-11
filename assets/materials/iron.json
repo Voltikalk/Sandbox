@@ -1,0 +1,22 @@
+{
+    "id": 13,
+    "name": "iron",
+    "category": "solids",
+    "state": "Solid",
+    "color": [192, 196, 200, 255],
+    "color_variation": 8,
+    "density": 7800.0,
+    "dispersion": 0,
+    "flammability": 0.0,
+    "ignition_temp": 10000.0,
+    "melt_point": 1538.0,
+    "boil_point": 2862.0,
+    "freeze_point": -273.15,
+    "specific_heat": 0.45,
+    "thermal_conductivity": 0.95,
+    "strength": 150.0,
+    "lifetime": 0,
+    "melt_target": "lava",
+    "boil_target": "",
+    "freeze_target": ""
+}

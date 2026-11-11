@@ -1,0 +1,22 @@
+{
+    "id": 7,
+    "name": "oil",
+    "category": "liquids",
+    "state": "Liquid",
+    "color": [85, 75, 40, 240],
+    "color_variation": 6,
+    "density": 800.0,
+    "dispersion": 3,
+    "flammability": 0.80,
+    "ignition_temp": 80.0,
+    "melt_point": 10000.0,
+    "boil_point": 300.0,
+    "freeze_point": -20.0,
+    "specific_heat": 1.80,
+    "thermal_conductivity": 0.12,
+    "strength": 0.0,
+    "lifetime": 0,
+    "melt_target": "",
+    "boil_target": "smoke",
+    "freeze_target": ""
+}

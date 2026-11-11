@@ -1,0 +1,22 @@
+{
+    "id": 3,
+    "name": "sand",
+    "category": "powders",
+    "state": "Powder",
+    "color": [228, 204, 131, 255],
+    "color_variation": 16,
+    "density": 1600.0,
+    "dispersion": 2,
+    "flammability": 0.0,
+    "ignition_temp": 10000.0,
+    "melt_point": 1700.0,
+    "boil_point": 10000.0,
+    "freeze_point": -273.15,
+    "specific_heat": 0.80,
+    "thermal_conductivity": 0.25,
+    "strength": 15.0,
+    "lifetime": 0,
+    "melt_target": "glass",
+    "boil_target": "",
+    "freeze_target": ""
+}
